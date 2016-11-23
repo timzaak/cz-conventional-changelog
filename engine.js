@@ -50,9 +50,13 @@ module.exports = function (options) {
           choices: choices
         }, {
           type: 'input',
-          name: 'scope',
-          message: 'Denote the scope of this change ($location, $browser, $compile, etc.):\n'
-        }, {
+          name: 'jira',
+          message: 'JIRA ID,多个用英文逗号隔开，for example: IMPROVED-123\n'
+        },{
+          type: 'input',
+          name: "scope",
+          message: '具体哪一个模块，如果多个模块，用英文逗号分隔开\n'
+        },{
           type: 'input',
           name: 'subject',
           message: 'Write a short, imperative tense description of the change:\n'
@@ -63,7 +67,7 @@ module.exports = function (options) {
         }, {
           type: 'input',
           name: 'footer',
-          message: 'List any breaking changes or issues closed by this change:\n'
+          message: '如果要关闭上述提及的JIRA，请填写JIRA ID\n'
         }
       ]).then(function(answers) {
 
@@ -78,14 +82,15 @@ module.exports = function (options) {
 
         // parentheses are only needed when a scope is present
         var scope = answers.scope.trim();
-        scope = scope ? '(' + answers.scope.trim() + ')' : '';
-
+        scope = scope ? '[' + scope + ']' : '';
+        var type = '['+ answers.type + ']';
+        var jira = answers.jira ? '['+ answers.jira + ']':'';
         // Hard limit this line
-        var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
+        var head = (type + jira + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
 
         // Wrap these lines at 100 characters
         var body = wrap(answers.body, wrapOptions);
-        var footer = wrap(answers.footer, wrapOptions);
+        var footer = wrap(answers.footer ? 'closes '+ answers.footer:'', wrapOptions);
 
         commit(head + '\n\n' + body + '\n\n' + footer);
       });

@@ -4,40 +4,40 @@ var engine = require('./engine');
 
 module.exports = engine({
   types: {
-    "api add": {
+    "API ADD": {
       "description": "add new api"
     },
-    "api change": {
+    "API CHANEG": {
       "description": "change api url or api response or api request param"
     },
-    "api delete": {
+    "API DELETE": {
       "description": "delete unused api"
     },
-    "feat": {
+    "FEATURE": {
       "description": "A new feature"
     },
-    "fix": {
+    "FIX": {
       "description": "A bug fix"
     },
-    "refactor": {
+    "REFACTOR": {
       "description": "A code change that neither fixes a bug nor adds a feature"
     },
-    "perf": {
+    "PERF": {
       "description": "A code change that improves performance"
     },
-    "test": {
+    "TEST": {
       "description": "Adding missing tests or correcting existing tests"
     },
-    "build": {
+    "BUILD": {
       "description": "Changes that affect the build system or external dependencies"
     },
-    "ci": {
+    "CI": {
       "description": "Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)"
     },
-    "chore": {
+    "CHORE": {
       "description": "Other changes that don't modify src or test files"
     },
-    "revert": {
+    "REVERT": {
       "description": "Reverts a previous commit"
     }
   }
