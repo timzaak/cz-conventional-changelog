@@ -46,7 +46,7 @@ module.exports = function (options) {
         {
           type: 'list',
           name: 'type',
-          message: 'Select the type of change that you\'re committing:',
+          message: 'Select the type of change that you\'re committing:\n',
           choices: choices
         }, {
           type: 'input',
@@ -64,10 +64,6 @@ module.exports = function (options) {
           type: 'input',
           name: 'body',
           message: 'Provide a longer description of the change:\n'
-        }, {
-          type: 'input',
-          name: 'footer',
-          message: '如果要关闭上述提及的JIRA，请填写JIRA ID\n'
         }
       ]).then(function(answers) {
 
@@ -90,9 +86,9 @@ module.exports = function (options) {
 
         // Wrap these lines at 100 characters
         var body = wrap(answers.body, wrapOptions);
-        var footer = wrap(answers.footer ? 'closes '+ answers.footer:'', wrapOptions);
+        //var footer = wrap(answers.footer ? 'closes '+ answers.footer:'', wrapOptions);
 
-        commit(head + '\n\n' + body + '\n\n' + footer);
+        commit(head + '\n\n' + body);
       });
     }
   };
